@@ -21,11 +21,11 @@ void addContact(){
         return;
     }
     for(int i=0 ; i < multi ; i++){
-    printf("ajouter ton nom pour Contact %d :",i+1);
+    printf("ajouter le nom pour Contact %d :",i+1);
     scanf("%s",contacts[c].nom);
-    printf("ajouter ton numero de telephone pour Contact %d :",i+1);
+    printf("ajouter le numero de telephone pour Contact %d :",i+1);
     scanf("%s",contacts[c].num);
-    printf("ajouter ton adresse email pour Contact %d :",i+1);
+    printf("ajouter le adresse email pour Contact %d :",i+1);
     scanf("%s",contacts[c].email);
     c++;
     }
@@ -72,31 +72,41 @@ return;
 //3. Supprimer un Contact
 void Suppr_contact() {
     char Person[100];
-    printf("tapez le nom que vous souhaitez supprimer : ");
-    scanf("%s",Person);
+    char confirmation[3];
     int suppr = 0;
-    int i ;
-    int j ;
-    for (i = 0 ; i < c ; i++){
-        if(strcmp(Person,contacts[i].nom)==0)
-        suppr = 1;
-        break;
+    int i;
+    int j;
+    printf("Tapez le nom que vous souhaitez supprimer : ");
+    scanf("%s", Person);
+    for (i = 0; i < c; i++) {
+        if (strcmp(Person, contacts[i].nom) == 0) {
+            suppr = 1;
+            break;
+        }
     }
-    if(suppr==0){
-        printf("le nom du contact n'a pas ete trouve ! \n");
-    }else{
-    for( j = i ; j < c-1 ; j++ ){
-        strcpy(contacts[i].nom , contacts[j+1].nom);
-        strcpy(contacts[i].num , contacts[j+1].num);
-        strcpy(contacts[i].email , contacts[j+1].email);
-        break;
+
+    if (suppr == 0) {
+        printf("Le nom du contact n'a pas ete trouver ! \n");
+    } else {
+        printf("Etes vous sur de vouloir supprimer le contact '%s' ? (oui/non) : ", Person);
+        scanf("%s", confirmation);
+
+    if (strcmp(confirmation, "oui") == 0) {
+        for (j = i; j < c - 1; j++) {
+            strcpy(contacts[j].nom, contacts[j + 1].nom);
+            strcpy(contacts[j].num, contacts[j + 1].num);
+            strcpy(contacts[j].email, contacts[j + 1].email);
+            }
+            strcpy(contacts[c - 1].nom, "");
+            strcpy(contacts[c - 1].num, "");
+            strcpy(contacts[c - 1].email, "");
+
+            c--;
+            printf("Le contact a ete supprime ! \n");
+        } else {
+            printf("Suppression annulee.\n");
+        }
     }
-        strcpy(contacts[j+1].nom , "");
-        strcpy(contacts[j+1].num , "");
-        strcpy(contacts[j+1].email , "");
-    }
-    c--;
-    printf("le contact est supprimer ! \n");
     return;
 }
 // 5 .rechercher un Contact :
@@ -127,7 +137,15 @@ void Recherch_Contact(){
         }
 
 }
-
+// 6 .tri(caming soon hh)
+//void TriParInsertion(){
+    //printf("les contact est tri par insertion \n");
+    //for(int i = 1 ; i < c ; i++){
+       // int tmp = contacts[c].nom;
+       // int j = i - 1;
+        //while(tmp < )
+    //}
+//}
 
 int main() {
     //Contact contacts[MAX_CONTACT];
@@ -141,12 +159,13 @@ int main() {
         printf("3. Supprimer un Contact \n");
         printf("4. Afficher Tous les Contacts \n");
         printf("5. Rechercher un Contact \n");
-        printf("6. Quitter \n");
+        printf("6. Tri Par Insertion \n");
+        printf("7. Quitter \n");
         printf("======================== \n");
         printf("Choisissez une option : ");
         scanf("%d", &choice);
 
-        switch (choice) {
+    switch (choice) {
             case 1:
                 addContact();
                 break;
@@ -163,6 +182,9 @@ int main() {
                 Recherch_Contact();
                 break;
             case 6:
+                //TriParInsertion();
+                break;
+            case 7:
                 printf("end !\n");
                 break;
             default:
