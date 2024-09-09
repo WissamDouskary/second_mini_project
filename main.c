@@ -137,15 +137,22 @@ void Recherch_Contact(){
         }
 
 }
-// 6 .tri(caming soon hh)
-//void TriParInsertion(){
-    //printf("les contact est tri par insertion \n");
-    //for(int i = 1 ; i < c ; i++){
-       // int tmp = contacts[c].nom;
-       // int j = i - 1;
-        //while(tmp < )
-    //}
-//}
+// 6 .tri par insertion
+void TriParInsertion(){
+    printf("les contact est tri par insertion \n");
+    for(int i = 1 ; i < c ; i++){
+        Contact tmp = contacts[i];
+        int j = i - 1;
+        while (j >= 0 && strcmp(tmp.nom, contacts[j].nom) < 0) {
+        contacts[j + 1] = contacts[j];
+        j--;
+    }
+
+    contacts[j + 1] = tmp;
+    }
+
+    return;
+}
 
 int main() {
     //Contact contacts[MAX_CONTACT];
@@ -182,7 +189,7 @@ int main() {
                 Recherch_Contact();
                 break;
             case 6:
-                //TriParInsertion();
+                TriParInsertion(); //you should click 6 on the menu page and click 4 to show all contacts .
                 break;
             case 7:
                 printf("end !\n");
